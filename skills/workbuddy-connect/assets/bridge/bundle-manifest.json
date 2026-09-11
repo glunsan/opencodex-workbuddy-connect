@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "files": {
+    "Install.cmd": "55a2f90de1fb231cbf907a9ef3049533413991ad1448f04e1c090cf3ead09a29",
+    "LICENSE": "8fcc42b7f6e06eb57441e7c4fc10d45d8c138a196a1bd44b5878b53dddf7c56e",
+    "NOTICE.md": "9359dcc2dad81e43aba29218bab73f75bd4b2f8dc850923986260585832c771f",
+    "README.md": "9a397ba0bdbce109f91970555aff0ae579b050273f7a05f2a967adbe2d038b0f",
+    "Start-Bridge.cmd": "b47e40da050a76b68ca5ca49b4e1778d291f6a710ec1feabe4bd14e83b219fd4",
+    "Uninstall.cmd": "962847364bcb60d4e763ec75b164bd428b6a044177fe6cfe77dfb9bff7cd3de4",
+    "package.json": "268b067931f5389136e0d4831717d5aedb6eddd2814ad8105f1ee8ad9a4a5ec3",
+    "scripts/Install.ps1": "3f90b5f661f072675e17402e66fe88f315f07b0d015413247cfbaa0d708bfb44",
+    "scripts/Start-Bridge.ps1": "9c298e04c900f4c0041cb4f9e45b8de55d9adcb90457c2e353110f4a9f4384a0",
+    "scripts/Uninstall.ps1": "fedfafb1c1bc2dbb47394fa4b35c88792f791b594b7b66fbbbee7d1a10560ba7",
+    "src/auth.ts": "dc008a910b5e80464b940e2f3f5a6ba7d1c07e592fca9d803301f449871fbf6e",
+    "src/cli.ts": "550fbeb8743f8ea4fc2c19958ac934ad790b4f9eac60928a4fee529e059e9d25",
+    "src/install.ts": "91d206188affb0157d22e564449aff87077048b1f1c29df4e79ec5fcdfef12ef",
+    "src/loopback.ts": "87bfa7ad5456dc6277879295baa6f02ff89aca12d0c48a3d42ff34a1259957cf",
+    "src/probe.ts": "5fc9770908ca37a72b7cb3d91b16e3836cf37611d2bf7c9e038728c553af3d85",
+    "src/server.ts": "2df668cfa8093de27703278749d1a5c3c22436c8f416014dcbbc731b1a770621",
+    "src/sse.ts": "8bf164e1c6e94dbd3fe9ee7bd727ab519cca789e8d4ce3c7a435e4dbb360d163",
+    "src/storage.ts": "5838c127aaefa353d46ee864b74ccd71b8fb6b530886962b5a58ebe7c9725407",
+    "src/upstream.ts": "d9c4ee52a61d33d09795b163cfbf587e2128a9fafd83eea0a16a55b3274e5d87",
+    "tests/auth.test.ts": "493774079714d3c74e3b8637750822be5c2651c706c8b948c310e3f71ced5912",
+    "tests/cli.test.ts": "1c5b794529693a9e22a0d7d936d200607df3699bccb0a89f32422788c20dd939",
+    "tests/install.test.ts": "27a1205bad8a8afca627dddaa2b65aef40946e6f57613a273bbfc9d21ec3ea14",
+    "tests/server.test.ts": "4b8d0925be09b8509cd0a44ab23b23425b797116d63d32328e2cf30a547300ee",
+    "tests/upstream.test.ts": "f21aae0c27e7c8e603ff447c2410b162b82738e4957c2b708adb4e654993bf25"
+  }
+}

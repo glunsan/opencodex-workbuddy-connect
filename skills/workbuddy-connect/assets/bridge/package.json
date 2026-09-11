@@ -1,0 +1,17 @@
+{
+  "name": "opencodex-workbuddy-connect",
+  "version": "1.1.0",
+  "description": "Local WorkBuddy CN and Global bridge for OpenCodex and Codex",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node src/cli.ts serve",
+    "status": "node src/cli.ts status",
+    "test": "node --test --test-isolation=none tests/*.test.ts",
+    "build:skill": "node scripts/build-skill.mjs",
+    "check:skill": "node scripts/build-skill.mjs --check"
+  },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/glunsan/opencodex-workbuddy-connect.git" }
+}

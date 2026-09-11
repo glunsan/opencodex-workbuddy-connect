@@ -1,0 +1,7 @@
+interface:
+  display_name: "WorkBuddy Connect"
+  short_description: "Connect local WorkBuddy to OpenCodex"
+  default_prompt: "Use $workbuddy-connect to install or check my local WorkBuddy bridge for OpenCodex."
+
+policy:
+  allow_implicit_invocation: true
