@@ -90,10 +90,11 @@ test('account switch during refresh discards the old result and resolves the new
   const f = await fixture()
   try {
     const gate = deferred<{ accessToken: string, expiresInSec: number }>()
+    const started = deferred<void>()
     await writeFile(f.auth, desktop('alice', 'www.codebuddy.cn', Date.now() - 1))
-    const store = new RegionCredentialStore({ region: 'cn', desktopPath: f.auth, stateDir: f.state, refresh: async () => gate.promise })
+    const store = new RegionCredentialStore({ region: 'cn', desktopPath: f.auth, stateDir: f.state, refresh: async () => { started.resolve(); return gate.promise } })
     const pending = store.resolve()
-    await new Promise(resolve => setImmediate(resolve))
+    await started.promise
     await writeFile(f.auth, desktop('bob', 'www.codebuddy.cn'))
     gate.resolve({ accessToken: 'alice-refreshed', expiresInSec: 3600 })
     assert.equal((await pending).accessToken, 'access-bob')
@@ -105,10 +106,11 @@ test('logout during refresh rejects and never returns the stale credential', asy
   const f = await fixture()
   try {
     const gate = deferred<{ accessToken: string, expiresInSec: number }>()
+    const started = deferred<void>()
     await writeFile(f.auth, desktop('alice', 'www.codebuddy.cn', Date.now() - 1))
-    const store = new RegionCredentialStore({ region: 'cn', desktopPath: f.auth, stateDir: f.state, refresh: async () => gate.promise })
+    const store = new RegionCredentialStore({ region: 'cn', desktopPath: f.auth, stateDir: f.state, refresh: async () => { started.resolve(); return gate.promise } })
     const pending = store.resolve()
-    await new Promise(resolve => setImmediate(resolve))
+    await started.promise
     await rm(f.auth)
     gate.resolve({ accessToken: 'alice-refreshed', expiresInSec: 3600 })
     await assert.rejects(() => pending, /no matching signed-in desktop account/)

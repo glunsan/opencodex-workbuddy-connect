@@ -18,8 +18,8 @@ Codex → OpenCodex → 本机 WorkBuddy Bridge → 你自己的 WorkBuddy 账�
 
 | 文件 | 适用情况 |
 |---|---|
-| `opencodex-workbuddy-connect-v1.1.2.zip` | 完整源码 + Windows 安装器 + 技能，推荐大多数朋友使用 |
-| `workbuddy-connect-skill-v1.1.2.zip` | 独立 Codex 技能，包含运行源码；让 Codex 帮你完成安装 |
+| `opencodex-workbuddy-connect-v1.1.3.zip` | 完整源码 + Windows 安装器 + 技能，推荐大多数朋友使用 |
+| `workbuddy-connect-skill-v1.1.3.zip` | 独立 Codex 技能，包含运行源码；让 Codex 帮你完成安装 |
 
 也可以 `git clone https://github.com/glunsan/opencodex-workbuddy-connect.git`。下载项目时使用 **Code → Download ZIP** 同样可用。
 
@@ -156,7 +156,7 @@ Windows 后台托管回归检查（创建独立测试任务，结束时移除；
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/bridge-task.integration.ps1
 ```
 
-它验证模型子进程及整个后台任务被终止后的自动恢复、已有自定义端口保留，以及 `-NoAutoStart` 不被手动启动改变。v1.1.2 修复了旧版后台进程被整体终止后缺少再次触发、导致 OpenCodex 502 的问题。禁用自动启动时不会添加定时恢复触发器；完整卸载会先禁用任务，再停止并移除，避免卸载时被重新拉起。
+它验证模型子进程及整个后台任务被终止后的自动恢复、已有自定义端口保留，以及 `-NoAutoStart` 不被手动启动改变。v1.1.3 修复了旧版后台进程被整体终止后缺少再次触发、导致 OpenCodex 502 的问题。禁用自动启动时不会添加定时恢复触发器；完整卸载会先禁用任务，再停止并移除，避免卸载时被重新拉起。
 
 `build:skill` 将允许发布的运行文件同步至技能 `assets/bridge`。CI 在 Windows 和 Linux / Node.js 24 上运行本地测试与技能副本一致性检查，不访问真实 WorkBuddy 账号。
 
