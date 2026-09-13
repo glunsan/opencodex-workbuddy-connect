@@ -16,6 +16,7 @@ if ($Region -eq 'cn' -or $Region -eq 'global') {
     return
 }
 $shortcutPath = Join-Path ([Environment]::GetFolderPath('Startup')) 'OpenCodex WorkBuddy Connect.lnk'
+& (Join-Path $PSScriptRoot 'Remove-BridgeTask.ps1') -StateDir $resolvedState
 if (Test-Path -LiteralPath $shortcutPath) {
     $shell = New-Object -ComObject WScript.Shell
     $shortcut = $shell.CreateShortcut($shortcutPath)

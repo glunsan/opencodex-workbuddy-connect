@@ -93,7 +93,7 @@ export function createBridge(options: BridgeOptions) {
       }
       const path = new URL(req.url ?? '/', 'http://127.0.0.1').pathname.replace(/\/$/, '')
       if (req.method === 'GET' && path === '/healthz') {
-        json(res, 200, { ok: true, service: 'opencodex-workbuddy-connect', version: '1.1.0' }); return
+        json(res, 200, { ok: true, service: 'opencodex-workbuddy-connect', version: '1.1.2' }); return
       }
       if (req.method === 'GET' && path === '/status') {
         const regions = Object.fromEntries(await Promise.all((['cn', 'global'] as const).map(async region => {

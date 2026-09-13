@@ -8,7 +8,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parent.parent
 VERSION = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))["version"]
 ALLOWED = ["src", "tests", "scripts", "skills", ".github", ".gitignore", ".gitattributes", "README.md", "LICENSE", "NOTICE.md", "package.json", "Install.cmd", "Start-Bridge.cmd", "Uninstall.cmd", "Install-Skill.cmd"]
-FORBIDDEN_NAMES = {"bridge.json", "runtime.json", "config.json", "admin-api-token", "verification.json"}
+FORBIDDEN_NAMES = {"bridge.json", "runtime.json", "bridge-task.json", "config.json", "admin-api-token", "verification.json"}
 
 
 def files_in(root):

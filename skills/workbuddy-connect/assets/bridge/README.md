@@ -18,8 +18,8 @@ Codex → OpenCodex → 本机 WorkBuddy Bridge → 你自己的 WorkBuddy 账�
 
 | 文件 | 适用情况 |
 |---|---|
-| `opencodex-workbuddy-connect-v1.1.0.zip` | 完整源码 + Windows 安装器 + 技能，推荐大多数朋友使用 |
-| `workbuddy-connect-skill-v1.1.0.zip` | 独立 Codex 技能，包含运行源码；让 Codex 帮你完成安装 |
+| `opencodex-workbuddy-connect-v1.1.2.zip` | 完整源码 + Windows 安装器 + 技能，推荐大多数朋友使用 |
+| `workbuddy-connect-skill-v1.1.2.zip` | 独立 Codex 技能，包含运行源码；让 Codex 帮你完成安装 |
 
 也可以 `git clone https://github.com/glunsan/opencodex-workbuddy-connect.git`。下载项目时使用 **Code → Download ZIP** 同样可用。
 
@@ -39,9 +39,9 @@ Codex → OpenCodex → 本机 WorkBuddy Bridge → 你自己的 WorkBuddy 账�
 2. 双击 `Install.cmd`。默认识别当前已登录的国内 / 国际区域，并注册对应模型。
 3. 在 Codex 模型选择器搜索 `workbuddy`，选择 `workbuddy-cn/...` 或 `workbuddy-global/...`。若已打开的选择器未更新，重新打开 Codex。
 
-安装器只添加自己的来源，不切换默认来源，也不修改 WorkBuddy 桌面登录文件。默认设置 Windows 登录后隐藏启动桥接。
+安装器只添加自己的来源，不切换默认来源，也不修改 WorkBuddy 桌面登录文件。默认注册当前用户的 Windows 后台任务，登录后隐藏启动；桥接意外退出时自动恢复。任务由 Windows 托管，不依赖安装终端或 Codex 会话保持运行。启用自动启动时，每分钟检查一次任务是否需要重新运行；进程整体被外部终止后通常在约一分钟内恢复，健康运行时不重复启动。若 Windows 只停止了托管进程，恢复时会核验并清理本安装遗留的子进程，避免端口冲突。
 
-**安装后请保留项目目录的位置。** 后台启动快捷方式指向此目录。移动或删除前请先卸载。
+**安装后请保留项目目录的位置。** Windows 后台任务指向此目录。移动或删除前请先卸载。
 
 终端安装可选择区域、端口或关闭自动启动：
 
@@ -107,7 +107,7 @@ Windows 默认只读以下文件（优先 Local AppData，找不到时查 Roamin
 | 国内版 | `CodeBuddyExtension\Data\Public\auth\workbuddy-desktop.info` |
 | 国际版 | `CodeBuddyExtension\Data\Public\auth\workbuddy-desktop-ai.info` |
 
-自定义位置用 `WORKBUDDY_CN_AUTH_FILE` 和 `WORKBUDDY_GLOBAL_AUTH_FILE`。桥接运行状态默认在 `%USERPROFILE%\.opencodex\workbuddy-connect`，可以用 `WORKBUDDY_BRIDGE_HOME` 或 CLI `--state-dir` 自定义；PowerShell 安装器可传 `-StateDir`。
+自定义位置用 `WORKBUDDY_CN_AUTH_FILE` 和 `WORKBUDDY_GLOBAL_AUTH_FILE`。任务运行日志为状态目录内的 `bridge-supervisor.log`。桥接运行状态默认在 `%USERPROFILE%\.opencodex\workbuddy-connect`，可以用 `WORKBUDDY_BRIDGE_HOME` 或 CLI `--state-dir` 自定义；PowerShell 安装器可传 `-StateDir`。
 
 - 桥接绑定 `127.0.0.1`，校验 Bearer、Host 和浏览器 Origin。
 - 对话内容与 access token 只发给对应 WorkBuddy 服务。refresh token 只用于刷新接口。
@@ -134,7 +134,7 @@ Windows 默认只读以下文件（优先 Local AppData，找不到时查 Roamin
 
 ## 卸载
 
-保持 OpenCodex 运行，双击 `Uninstall.cmd`。它移除自己的模型来源、对应启动快捷方式并停止本桥接，保留原有来源和 WorkBuddy 登录。运行状态目录保留供恢复。
+保持 OpenCodex 运行，双击 `Uninstall.cmd`。它移除自己的模型来源和 Windows 后台任务，并停止本桥接，保留原有来源和 WorkBuddy 登录。运行状态目录保留供恢复。
 
 如果把 WorkBuddy 设成 OpenCodex 的默认来源，先切换默认来源再卸载。为防止误停其他安装，遇到路径或来源冲突会停止并提示。
 
@@ -149,6 +149,14 @@ npm test
 npm run build:skill
 npm run check:skill
 ```
+
+Windows 后台托管回归检查（创建独立测试任务，结束时移除；不会调用模型或修改 OpenCodex 来源）：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/bridge-task.integration.ps1
+```
+
+它验证模型子进程及整个后台任务被终止后的自动恢复、已有自定义端口保留，以及 `-NoAutoStart` 不被手动启动改变。v1.1.2 修复了旧版后台进程被整体终止后缺少再次触发、导致 OpenCodex 502 的问题。禁用自动启动时不会添加定时恢复触发器；完整卸载会先禁用任务，再停止并移除，避免卸载时被重新拉起。
 
 `build:skill` 将允许发布的运行文件同步至技能 `assets/bridge`。CI 在 Windows 和 Linux / Node.js 24 上运行本地测试与技能副本一致性检查，不访问真实 WorkBuddy 账号。
 

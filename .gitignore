@@ -3,6 +3,7 @@ node_modules/
 *.log
 bridge.json
 runtime.json
+bridge-task.json
 *-auth.json
 backups/
 .test-*/
